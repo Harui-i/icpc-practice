@@ -23,7 +23,7 @@
       "args": [
         "SRC=${file}",
         "OUT=${workspaceFolder}/.build/${fileBasenameNoExtension}",
-        "debug"
+        "build"
       ],
       "group": "build",
       "problemMatcher": "$gcc"

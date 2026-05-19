@@ -7,9 +7,9 @@
       "request": "launch",
       "program": "${workspaceFolder}/.build/${fileBasenameNoExtension}",
       "args": [],
-      "cwd": "${workspaceFolder}",
+      "cwd": "${fileDirname}",
       "stdio": [
-        "${workspaceFolder}/sample.in",
+        "${fileDirname}/sample.in",
         null,
         null
       ],

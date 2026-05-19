@@ -143,7 +143,19 @@ make clean
 
 デバッグは `Debug active file (CodeLLDB)` を使います。
 
-Mac で VSCode デバッグを使う場合、VSCode 拡張の `CodeLLDB` が必要です。VSCode の拡張機能画面から入れられるので、Homebrew は不要です。
+使い方:
+
+1. デバッグしたい `*.cpp` を開く
+2. 必要なら同じディレクトリの `sample.in` を編集する
+3. VSCode の Run and Debug から `Debug active file (CodeLLDB)` を選んで開始する
+
+この設定では、開いているファイルをデバッグ用にビルドしてから起動します。標準入力には、開いているファイルと同じディレクトリの `sample.in` が渡されます。
+
+Mac で VSCode デバッグを使う場合、VSCode 拡張の `CodeLLDB` が必要です。VSCode の拡張機能画面から入れられるので、Homebrew は不要です。C++ コンパイラが入っていない場合は、Mac 標準の開発ツールを入れるために次を一度だけ実行してください。
+
+```sh
+xcode-select --install
+```
 
 ## ライブラリ
 
