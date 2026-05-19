@@ -1,1 +1,1 @@
-include ../../../problem.mk
+include ../../../task.mk

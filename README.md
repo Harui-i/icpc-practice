@@ -106,7 +106,7 @@ make clean
 .
 ├── Makefile
 ├── README.md
-├── problem.mk
+├── task.mk
 ├── template.cpp
 ├── vimrc.icpc
 ├── sample.in

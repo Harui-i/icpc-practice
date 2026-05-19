@@ -58,7 +58,7 @@ new:
 		path="$$dir/$(NAME)_$$problem.cpp"; \
 		mkdir -p "$$dir"; \
 		cp template.cpp "$$path"; \
-		printf 'include ../../../problem.mk\n' > "$$dir/Makefile"; \
+		printf 'include ../../../task.mk\n' > "$$dir/Makefile"; \
 		: > "$$dir/sample.in"; \
 		: > "$$dir/sample.out"; \
 		echo "created $$path"; \
