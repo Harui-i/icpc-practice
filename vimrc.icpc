@@ -23,6 +23,11 @@ set backspace=indent,eol,start
 set mouse=
 set clipboard=unnamed
 
+augroup icpc_workdir
+  autocmd!
+  autocmd BufEnter * if expand('%:p') !=# '' | silent! lcd %:p:h | endif
+augroup END
+
 nnoremap <Space><Space> :nohlsearch<CR>
 nnoremap <F5> :w<CR>:make run<CR>
 nnoremap <F6> :w<CR>:make debug<CR>
