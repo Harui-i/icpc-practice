@@ -4,6 +4,28 @@ ICPC のチーム練習で使うための、軽めの C++ 練習環境です。
 
 Mac を優先しつつ、Ubuntu でもそのまま使えることを目標にしています。Homebrew やインストール用スクリプトにはできるだけ依存しません。
 
+## 最初に入れるもの
+
+この環境では `make bundle` やライブラリ検証で `uv` / `uvx` を使うので、入っていない場合は先にインストールしてください。
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+VSCode で使う場合は、デバッグ用に `CodeLLDB` 拡張も必要です。
+
+```sh
+code --install-extension vadimcn.vscode-lldb
+```
+
+`code` コマンドが使えない場合は、VSCode の拡張機能画面から `CodeLLDB` をインストールしてください。(たぶんVSCodeの右下に「この拡張をインストールしますか？」のようなダイアログが出るはずです)
+
+Mac で C++ コンパイラや `make` が入っていない場合は、Apple の開発ツールも一度だけ入れてください。
+
+```sh
+xcode-select --install
+```
+
 ## 方針
 
 - VSCode でも Vim でも同じコマンドでビルド・実行できる
@@ -151,11 +173,7 @@ make clean
 
 この設定では、開いているファイルをデバッグ用にビルドしてから起動します。標準入力には、開いているファイルと同じディレクトリの `sample.in` が渡されます。
 
-Mac で VSCode デバッグを使う場合、VSCode 拡張の `CodeLLDB` が必要です。VSCode の拡張機能画面から入れられるので、Homebrew は不要です。C++ コンパイラが入っていない場合は、Mac 標準の開発ツールを入れるために次を一度だけ実行してください。
-
-```sh
-xcode-select --install
-```
+Mac で必要なツールは、先頭の「最初に入れるもの」を参照してください。
 
 ## ライブラリ
 
@@ -207,7 +225,7 @@ uvx --from online-judge-verify-helper oj-bundle -I lib problems/icpc2025prelim/A
 #include "lib/graph/dijkstra.hpp"
 ```
 
-`uvx` が見つからない場合は、先に `uv` を入れてください。
+`uvx` が見つからない場合は、先頭の「最初に入れるもの」を参考にして `uv` を入れてください。
 
 参考: <https://docs.astral.sh/uv/>
 
