@@ -14,54 +14,62 @@ Mac を優先しつつ、Ubuntu でもそのまま使えることを目標にし
 
 ## 基本コマンド
 
-新しい問題ファイルを作る:
+新しいコンテスト用の問題ファイルを作る:
 
 ```sh
-make new NAME=problems/a.cpp
+make new NAME=icpc2025prelim
+```
+
+`problems/icpc2025prelim/A/icpc2025prelim_A.cpp` から `problems/icpc2025prelim/Z/icpc2025prelim_Z.cpp` まで作られます。
+
+各問題ディレクトリには `Makefile` も作られるので、作業中はそのディレクトリで短く実行できます。
+
+```sh
+cd problems/icpc2025prelim/A
 ```
 
 デバッグ・サニタイザ付きでビルドして実行する:
 
 ```sh
-make SRC=problems/a.cpp run
+make run
 ```
 
 最適化付きでビルドして実行する:
 
 ```sh
-make SRC=problems/a.cpp runo2
+make runo2
 ```
 
 `sample.in` と `sample.out` でサンプルテストする:
 
 ```sh
-make SRC=problems/a.cpp test
+make test
 ```
 
 デバッグ・サニタイザ付きでビルドする:
 
 ```sh
-make SRC=problems/a.cpp build
+make build
 ```
 
 最適化付きでビルドする:
 
 ```sh
-make SRC=problems/a.cpp buildo2
+make buildo2
 ```
 
 `#include "..."` を展開して提出用の1ファイルにする:
 
 ```sh
-make SRC=problems/a.cpp bundle
+make bundle
 ```
 
-デフォルトでは `.build/bundled.cpp` に出力されます。
+問題ディレクトリで実行した場合、デフォルトでは同じディレクトリの `submit.cpp` に出力されます。
 
 出力先を指定する:
 
 ```sh
-make SRC=problems/a.cpp BUNDLE=submit.cpp bundle
+make BUNDLE=answer.cpp bundle
 ```
 
 生成物を消す:
@@ -76,6 +84,7 @@ make clean
 .
 ├── Makefile
 ├── README.md
+├── problem.mk
 ├── template.cpp
 ├── vimrc.icpc
 ├── sample.in
@@ -83,7 +92,14 @@ make clean
 ├── lib/
 │   └── debug.hpp
 ├── problems/
-│   └── a.cpp
+│   └── icpc2025prelim/
+│       ├── A/
+│       │   ├── Makefile
+│       │   └── icpc2025prelim_A.cpp
+│       ├── B/
+│       │   ├── Makefile
+│       │   └── icpc2025prelim_B.cpp
+│       └── ...
 └── .vscode/
     ├── tasks.json
     ├── launch.json
@@ -102,7 +118,7 @@ make clean
 ファイルを指定して開く:
 
 ```sh
-./vim.sh problems/b.cpp
+./vim.sh problems/icpc2025prelim/B/icpc2025prelim_B.cpp
 ./vim.sh sample.in
 ```
 
@@ -154,16 +170,17 @@ dbg(a);
 
 ## 提出用ファイルを作る
 
-`make bundle` は `uvx` 経由で `oj-bundle` を実行します。
+`make bundle` は `uvx` 経由で `oj-bundle` を実行します。問題ディレクトリで実行できます。
 
 ```sh
-make SRC=problems/a.cpp bundle
+cd problems/icpc2025prelim/A
+make bundle
 ```
 
 内部では次のようなコマンドを実行します。
 
 ```sh
-uvx --from online-judge-verify-helper oj-bundle -I lib problems/a.cpp
+uvx --from online-judge-verify-helper oj-bundle -I lib problems/icpc2025prelim/A/icpc2025prelim_A.cpp
 ```
 
 `-I lib` を付けているので、`lib/` 以下のライブラリを展開できます。
@@ -176,11 +193,11 @@ uvx --from online-judge-verify-helper oj-bundle -I lib problems/a.cpp
 
 `uvx` が見つからない場合は、先に `uv` を入れてください。
 
-参考: https://docs.astral.sh/uv/
+参考: <https://docs.astral.sh/uv/>
 
 ## 注意
 
-`sample.in` と `sample.out` は共通のサンプル用ファイルです。別の問題を解くときは、必要に応じて中身を書き換えてください。
+問題ディレクトリで `make test` すると、そのディレクトリの `sample.in` と `sample.out` を使います。
 
 Mac の標準コンパイラでは `bits/stdc++.h` が使えないことが多いです。使いたい場合は GCC が必要になることがありますが、この環境では標準ヘッダを列挙する方針にしています。
 <!--  -->

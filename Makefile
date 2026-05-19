@@ -42,11 +42,21 @@ bundle:
 	@echo "bundled: $(BUNDLE)"
 
 new:
-	@if [ -z "$(NAME)" ]; then echo "usage: make new NAME=problems/a.cpp"; exit 1; fi
-	@mkdir -p "$$(dirname "$(NAME)")"
-	@if [ -e "$(NAME)" ]; then echo "$(NAME) already exists"; exit 1; fi
-	@cp template.cpp "$(NAME)"
-	@echo "created $(NAME)"
+	@if [ -z "$(NAME)" ]; then echo "usage: make new NAME=icpc2025prelim"; exit 1; fi
+	@for problem in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z; do \
+		path="problems/$(NAME)/$$problem/$(NAME)_$$problem.cpp"; \
+		if [ -e "$$path" ]; then echo "$$path already exists"; exit 1; fi; \
+		makefile="problems/$(NAME)/$$problem/Makefile"; \
+		if [ -e "$$makefile" ]; then echo "$$makefile already exists"; exit 1; fi; \
+	done
+	@for problem in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z; do \
+		dir="problems/$(NAME)/$$problem"; \
+		path="$$dir/$(NAME)_$$problem.cpp"; \
+		mkdir -p "$$dir"; \
+		cp template.cpp "$$path"; \
+		printf 'include ../../../problem.mk\n' > "$$dir/Makefile"; \
+		echo "created $$path"; \
+	done
 
 clean:
 	rm -rf .build
