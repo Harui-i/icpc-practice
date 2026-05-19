@@ -22,7 +22,7 @@ make new NAME=icpc2025prelim
 
 `problems/icpc2025prelim/A/icpc2025prelim_A.cpp` から `problems/icpc2025prelim/Z/icpc2025prelim_Z.cpp` まで作られます。
 
-各問題ディレクトリには `Makefile` も作られるので、作業中はそのディレクトリで短く実行できます。
+各問題ディレクトリには `Makefile`、`sample.in`、`sample.out` も作られるので、作業中はそのディレクトリで短く実行できます。
 
 ```sh
 cd problems/icpc2025prelim/A
@@ -95,9 +95,13 @@ make clean
 │   └── icpc2025prelim/
 │       ├── A/
 │       │   ├── Makefile
+│       │   ├── sample.in
+│       │   ├── sample.out
 │       │   └── icpc2025prelim_A.cpp
 │       ├── B/
 │       │   ├── Makefile
+│       │   ├── sample.in
+│       │   ├── sample.out
 │       │   └── icpc2025prelim_B.cpp
 │       └── ...
 └── .vscode/

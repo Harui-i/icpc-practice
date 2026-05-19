@@ -48,6 +48,10 @@ new:
 		if [ -e "$$path" ]; then echo "$$path already exists"; exit 1; fi; \
 		makefile="problems/$(NAME)/$$problem/Makefile"; \
 		if [ -e "$$makefile" ]; then echo "$$makefile already exists"; exit 1; fi; \
+		sample_in="problems/$(NAME)/$$problem/sample.in"; \
+		if [ -e "$$sample_in" ]; then echo "$$sample_in already exists"; exit 1; fi; \
+		sample_out="problems/$(NAME)/$$problem/sample.out"; \
+		if [ -e "$$sample_out" ]; then echo "$$sample_out already exists"; exit 1; fi; \
 	done
 	@for problem in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z; do \
 		dir="problems/$(NAME)/$$problem"; \
@@ -55,6 +59,8 @@ new:
 		mkdir -p "$$dir"; \
 		cp template.cpp "$$path"; \
 		printf 'include ../../../problem.mk\n' > "$$dir/Makefile"; \
+		: > "$$dir/sample.in"; \
+		: > "$$dir/sample.out"; \
 		echo "created $$path"; \
 	done
 
