@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build active file",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "SRC=${file}",
+        "OUT=${workspaceFolder}/.build/${fileBasenameNoExtension}",
+        "build"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "debug build active file",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "SRC=${file}",
+        "OUT=${workspaceFolder}/.build/${fileBasenameNoExtension}",
+        "debug"
+      ],
+      "group": "build",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "run active file",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "SRC=${file}",
+        "OUT=${workspaceFolder}/.build/${fileBasenameNoExtension}",
+        "run"
+      ],
+      "group": "test",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "sample test active file",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "SRC=${file}",
+        "OUT=${workspaceFolder}/.build/${fileBasenameNoExtension}",
+        "test"
+      ],
+      "group": "test",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "bundle active file",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "SRC=${file}",
+        "BUNDLE=${workspaceFolder}/.build/${fileBasenameNoExtension}.bundled.cpp",
+        "bundle"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

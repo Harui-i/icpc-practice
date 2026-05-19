@@ -1,0 +1,28 @@
+set nocompatible
+filetype plugin indent on
+syntax on
+
+set number
+set ruler
+set showcmd
+set wildmenu
+
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set autoindent
+set smartindent
+
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+set backspace=indent,eol,start
+set mouse=
+set clipboard=unnamed
+
+nnoremap <Space><Space> :nohlsearch<CR>
+nnoremap <F5> :w<CR>:make run<CR>
+nnoremap <F6> :w<CR>:make debug<CR>

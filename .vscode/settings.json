@@ -1,0 +1,13 @@
+{
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}"
+  ],
+  "files.associations": {
+    "bits/stdc++.h": "cpp",
+    "*.hpp": "cpp"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "terminal.integrated.cwd": "${workspaceFolder}"
+}

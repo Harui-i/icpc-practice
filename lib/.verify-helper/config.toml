@@ -1,0 +1,4 @@
+[[languages.cpp.environments]]
+CXX = "g++"
+CXXFLAGS = ["-std=gnu++20","-fdiagnostics-color=always", "-Wall", "-g", "-O2"]
+# "-fsanitize=address,undefined", "-ftrapv" をつけると行列が遅くなるので外した。
