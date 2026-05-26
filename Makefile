@@ -5,7 +5,7 @@ BUNDLE ?= .build/bundled.cpp
 
 .SUFFIXES:
 
-INCLUDE_FLAGS ?= -I.
+INCLUDE_FLAGS ?= -I. -Ilib
 DEBUG_FLAGS := -std=gnu++2b -fdiagnostics-color=always -Wall -g -fsanitize=address,undefined -ftrapv -DLOCAL
 O2_FLAGS := -std=gnu++2b -Wall -O2 -DNDEBUG
 
