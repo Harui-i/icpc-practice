@@ -72,6 +72,39 @@ struct FPS {
     return h.pre(deg);
   }
 
+  FPS sqrt(int deg = -1) const {
+    if (deg == -1) deg = size();
+    if (deg == 0) return FPS(0);
+
+    int lowest_deg = -1;
+    for (int i = 0; i < size(); i++) {
+      if (_vec[i] != mint(0)) {
+        lowest_deg = i;
+        break;
+      }
+    }
+    if (lowest_deg == -1) return FPS(deg);
+    if (lowest_deg % 2 == 1) return FPS(0);
+
+    int shift = lowest_deg / 2;
+    if (shift >= deg) return FPS(deg);
+
+    long long sqrt_coeff = mod_sqrt(_vec[lowest_deg].val(), mint::mod());
+    if (sqrt_coeff == -1) return FPS(0);
+
+    int rest_deg = deg - shift;
+    FPS f = ((*this >> lowest_deg) / _vec[lowest_deg]).pre(rest_deg);
+    FPS g = {mint(1)};
+    mint inv2 = mint(2).inv();
+    for (int d = 1; d < rest_deg; d <<= 1) {
+      g = ((g + f.pre(2 * d) * g.inv(2 * d)) * inv2).pre(2 * d);
+    }
+
+    FPS ret = (mint(sqrt_coeff) * g << shift).pre(deg);
+    ret.resize(deg);
+    return ret;
+  }
+
   // f^k を返す
   FPS pow(long long k, int deg = -1) const {
     mint lowest_coeff;

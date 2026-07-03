@@ -5,11 +5,66 @@
 #include <type_traits>
 #include <cassert>
 
+long long mod_pow_ll(long long x, long long n, long long mod) {
+    long long ret = 1;
+    while (n > 0) {
+        if (n & 1) ret = (__int128)ret * x % mod;
+        x = (__int128)x * x % mod;
+        n >>= 1;
+    }
+    return ret;
+}
+
+// x^2 = a (mod p) となる x を返す。存在しない場合は -1。
+// p は素数であることを仮定する。
+long long mod_sqrt(long long a, long long p) {
+    a %= p;
+    if (a < 0) a += p;
+    if (a == 0) return 0;
+    if (p == 2) return a;
+    if (mod_pow_ll(a, (p - 1) / 2, p) != 1) return -1;
+    if (p % 4 == 3) return mod_pow_ll(a, (p + 1) / 4, p);
+
+    long long q = p - 1;
+    int s = 0;
+    while ((q & 1) == 0) {
+        q >>= 1;
+        s++;
+    }
+
+    long long z = 2;
+    while (mod_pow_ll(z, (p - 1) / 2, p) != p - 1) z++;
+
+    long long c = mod_pow_ll(z, q, p);
+    long long x = mod_pow_ll(a, (q + 1) / 2, p);
+    long long t = mod_pow_ll(a, q, p);
+    int m = s;
+
+    while (t != 1) {
+        int i = 1;
+        long long tt = (__int128)t * t % p;
+        while (tt != 1) {
+            tt = (__int128)tt * tt % p;
+            i++;
+        }
+        long long b = c;
+        for (int j = 0; j < m - i - 1; j++) b = (__int128)b * b % p;
+        x = (__int128)x * b % p;
+        c = (__int128)b * b % p;
+        t = (__int128)t * c % p;
+        m = i;
+    }
+
+    return x;
+}
+
 template<int MOD, typename T = int>
 struct static_modint {
     T value;
 
     constexpr explicit static_modint() : value(0) {}
+
+    static constexpr int mod() { return MOD; }
 
     constexpr static_modint(long long v) {
         if constexpr (std::is_same<T, double>::value) {
@@ -74,6 +129,16 @@ struct static_modint {
             exp >>= 1;
         }
         return res;
+    }
+
+    long long sqrt_val() const {
+        return mod_sqrt(value, MOD);
+    }
+
+    static_modint sqrt() const {
+        long long ret = sqrt_val();
+        assert(ret != -1);
+        return static_modint(ret);
     }
 
     constexpr static_modint inv() const {
